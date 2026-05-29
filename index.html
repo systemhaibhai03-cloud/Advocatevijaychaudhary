@@ -14,10 +14,10 @@
 <meta property="og:title" content="Advocate Vijay Chaudhary | Best Lawyer in Jabalpur">
 <meta property="og:description" content="Professional legal services in Jabalpur. Criminal, Civil, Property & Family Law expert.">
 <meta property="og:image" content="https://i.imgur.com/DbiO2R0.jpeg">
-<meta property="og:url" content="https://advocatvijaychaudhary.netlify.app">
+<meta property="og:url" content="https://advocatvijaychaudhary.nett.to">
 <meta property="og:type" content="website">
 
-<link rel="canonical" href="https://advocatvijaychaudhary.netlify.app">
+<link rel="canonical" href="https://advocatvijaychaudhary.nett.to">
 
 <!-- Schema -->
 <script type="application/ld+json">
@@ -26,7 +26,7 @@
   "@type": "LegalService",
   "name": "Advocate Vijay Chaudhary",
   "image": "https://i.imgur.com/DbiO2R0.jpeg",
-  "url": "https://advocatvijaychaudhary.netlify.app",
+  "url": "https://advocatvijaychaudhary.nett.to",
   "telephone": "+91-XXXXXXXXXX",
   "address": {
     "@type": "PostalAddress",
@@ -44,6 +44,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
+<!-- AOS Animation Library -->
+<link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -56,6 +59,46 @@ body {
 }
 
 h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
+
+/* ===== SCROLL PROGRESS BAR ===== */
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #c9a961, #b8954a);
+    z-index: 9999;
+    transition: width 0.1s;
+}
+
+/* ===== PRELOADER ===== */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #fafaf7;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.5s, visibility 0.5s;
+}
+.preloader.hidden { opacity: 0; visibility: hidden; }
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid #f5f1e8;
+    border-top: 4px solid #c9a961;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
 
 /* ===== TOP BAR ===== */
 .top-bar {
@@ -77,7 +120,6 @@ h1, h2, h3, h4 { font-family: 'Playfair Display', serif; font-weight: 700; }
 .top-bar a { color: #fff; text-decoration: none; margin-left: 20px; transition: color 0.3s; }
 .top-bar a:hover { color: #c9a961; }
 .top-info span { margin-right: 25px; }
-.top-info i { color: #c9a961; margin-right: 6px; }
 
 /* ===== NAVBAR ===== */
 nav {
@@ -88,7 +130,9 @@ nav {
     z-index: 1000;
     box-shadow: 0 2px 20px rgba(0,0,0,0.06);
     border-bottom: 1px solid #f0ede5;
+    transition: all 0.3s;
 }
+nav.scrolled { padding: 12px 0; box-shadow: 0 5px 25px rgba(0,0,0,0.1); }
 .nav-content {
     max-width: 1280px;
     margin: 0 auto;
@@ -114,7 +158,9 @@ nav {
     color: #fff;
     font-size: 22px;
     box-shadow: 0 4px 15px rgba(201,169,97,0.3);
+    transition: transform 0.3s;
 }
+.logo:hover .logo-icon { transform: rotate(360deg); }
 .logo-text { display: flex; flex-direction: column; }
 .logo-name { 
     font-family: 'Playfair Display', serif; 
@@ -191,6 +237,11 @@ nav {
     height: 500px;
     background: radial-gradient(circle, rgba(201,169,97,0.08) 0%, transparent 70%);
     border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+@keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-20px, 20px); }
 }
 .hero-content {
     max-width: 1280px;
@@ -264,22 +315,19 @@ nav {
 .btn-secondary:hover {
     background: #1a2942;
     color: #fff;
+    transform: translateY(-3px);
 }
 
-.hero-image {
-    position: relative;
-}
+.hero-image { position: relative; }
 .hero-image-wrapper {
     position: relative;
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 25px 60px rgba(26,41,66,0.2);
+    transition: transform 0.5s;
 }
-.hero-image img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
+.hero-image-wrapper:hover { transform: scale(1.02); }
+.hero-image img { width: 100%; height: auto; display: block; }
 .hero-image::before {
     content: '';
     position: absolute;
@@ -303,6 +351,11 @@ nav {
     align-items: center;
     gap: 14px;
     z-index: 5;
+    animation: bounceCard 3s ease-in-out infinite;
+}
+@keyframes bounceCard {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
 }
 .floating-card-icon {
     width: 48px;
@@ -358,13 +411,45 @@ section { padding: 100px 0; }
     gap: 70px;
     align-items: center;
 }
-.about-image {
+.about-image-stack {
     position: relative;
+    padding: 20px;
+}
+.about-image-main {
     border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.12);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+    position: relative;
+    z-index: 2;
+    transition: transform 0.5s;
 }
-.about-image img { width: 100%; display: block; }
+.about-image-main:hover { transform: scale(1.03); }
+.about-image-main img { width: 100%; display: block; }
+.about-image-second {
+    position: absolute;
+    bottom: -30px;
+    right: -30px;
+    width: 55%;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+    border: 6px solid #fff;
+    z-index: 3;
+    transition: transform 0.5s;
+}
+.about-image-second:hover { transform: scale(1.05); }
+.about-image-second img { width: 100%; display: block; }
+.about-decoration {
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 120px;
+    height: 120px;
+    background: rgba(201,169,97,0.15);
+    border-radius: 12px;
+    z-index: 1;
+}
+
 .about-features {
     margin-top: 30px;
     display: grid;
@@ -375,7 +460,9 @@ section { padding: 100px 0; }
     display: flex;
     align-items: flex-start;
     gap: 14px;
+    transition: transform 0.3s;
 }
+.feature-item:hover { transform: translateX(8px); }
 .feature-icon {
     width: 42px;
     height: 42px;
@@ -430,6 +517,9 @@ section { padding: 100px 0; }
     border-color: transparent;
 }
 .service-card:hover::before { transform: scaleX(1); }
+.service-card:hover .service-icon {
+    transform: rotateY(360deg);
+}
 .service-icon {
     width: 64px;
     height: 64px;
@@ -441,6 +531,7 @@ section { padding: 100px 0; }
     font-size: 28px;
     margin-bottom: 22px;
     color: #c9a961;
+    transition: transform 0.6s;
 }
 .service-card h3 {
     font-size: 22px;
@@ -453,11 +544,74 @@ section { padding: 100px 0; }
     line-height: 1.7;
 }
 
-/* ===== WHY CHOOSE ===== */
-.why-choose { 
-    background: #fff;
+/* ===== PROFILE BANNER ===== */
+.profile-banner {
+    background: linear-gradient(135deg, #1a2942 0%, #2a3a5c 100%);
+    color: #fff;
     position: relative;
+    overflow: hidden;
 }
+.profile-banner::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(201,169,97,0.15) 0%, transparent 70%);
+    animation: float 8s ease-in-out infinite;
+}
+.profile-banner-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 60px;
+    align-items: center;
+    position: relative;
+    z-index: 2;
+}
+.profile-banner-img {
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 25px 60px rgba(0,0,0,0.4);
+    border: 4px solid #c9a961;
+    transition: transform 0.5s;
+}
+.profile-banner-img:hover { transform: scale(1.03); }
+.profile-banner-img img { width: 100%; display: block; }
+.profile-banner-text .section-tag { color: #c9a961; }
+.profile-banner-text h2 {
+    color: #fff;
+    font-size: 40px;
+    margin-bottom: 20px;
+    line-height: 1.2;
+}
+.profile-banner-text h2 span { color: #c9a961; font-style: italic; }
+.profile-banner-text p {
+    color: #c9d0dd;
+    font-size: 16px;
+    margin-bottom: 25px;
+    line-height: 1.9;
+}
+.profile-quote {
+    border-left: 4px solid #c9a961;
+    padding: 15px 0 15px 25px;
+    margin: 25px 0;
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+    font-size: 18px;
+    color: #fff;
+}
+.profile-signature {
+    margin-top: 25px;
+    font-family: 'Playfair Display', serif;
+    color: #c9a961;
+    font-size: 22px;
+    font-style: italic;
+}
+
+/* ===== WHY CHOOSE ===== */
+.why-choose { background: #fff; position: relative; }
 .why-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -469,9 +623,17 @@ section { padding: 100px 0; }
     padding: 40px 25px;
     background: linear-gradient(135deg, #fafaf7, #f5f1e8);
     border-radius: 12px;
-    transition: 0.3s;
+    transition: 0.4s;
 }
-.why-card:hover { transform: translateY(-8px); }
+.why-card:hover { 
+    transform: translateY(-10px); 
+    box-shadow: 0 20px 40px rgba(201,169,97,0.2);
+}
+.why-card:hover .why-icon {
+    transform: rotateY(360deg);
+    background: #c9a961;
+    color: #fff;
+}
 .why-icon {
     width: 80px;
     height: 80px;
@@ -484,6 +646,7 @@ section { padding: 100px 0; }
     font-size: 32px;
     color: #c9a961;
     box-shadow: 0 8px 20px rgba(201,169,97,0.2);
+    transition: all 0.6s;
 }
 .why-card h4 {
     font-size: 20px;
@@ -493,10 +656,7 @@ section { padding: 100px 0; }
 .why-card p { color: #6b7280; font-size: 14px; }
 
 /* ===== CONTACT ===== */
-.contact { 
-    background: #fafaf7;
-    position: relative;
-}
+.contact { background: #fafaf7; position: relative; }
 .contact-grid {
     display: grid;
     grid-template-columns: 1fr 1.3fr;
@@ -520,7 +680,9 @@ section { padding: 100px 0; }
     align-items: flex-start;
     gap: 16px;
     margin-bottom: 25px;
+    transition: transform 0.3s;
 }
+.contact-item:hover { transform: translateX(8px); }
 .contact-item-icon {
     width: 46px;
     height: 46px;
@@ -649,7 +811,7 @@ footer {
     transition: 0.3s;
     font-size: 14px;
 }
-.social-icons a:hover { background: #c9a961; transform: translateY(-3px); }
+.social-icons a:hover { background: #c9a961; transform: translateY(-5px) rotate(360deg); }
 .footer-bottom {
     border-top: 1px solid rgba(255,255,255,0.1);
     padding: 20px 40px;
@@ -683,13 +845,40 @@ footer {
     100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
 }
 
+/* ===== BACK TO TOP ===== */
+.back-to-top {
+    position: fixed;
+    bottom: 95px;
+    right: 25px;
+    width: 50px;
+    height: 50px;
+    background: #1a2942;
+    color: #fff;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    text-decoration: none;
+    box-shadow: 0 8px 20px rgba(26,41,66,0.3);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s;
+    cursor: pointer;
+    border: none;
+}
+.back-to-top.visible { opacity: 1; visibility: visible; }
+.back-to-top:hover { background: #c9a961; transform: translateY(-5px); }
+
 /* ===== RESPONSIVE ===== */
 @media(max-width: 968px) {
-    .hero-content, .about-grid, .contact-grid { grid-template-columns: 1fr; }
+    .hero-content, .about-grid, .contact-grid, .profile-banner-grid { grid-template-columns: 1fr; }
     .hero h1 { font-size: 42px; }
-    .section-title { font-size: 32px; }
+    .section-title, .profile-banner-text h2 { font-size: 32px; }
     .footer-content { grid-template-columns: 1fr 1fr; }
-    .about-image { max-width: 450px; margin: 0 auto; }
+    .about-image-stack { max-width: 450px; margin: 0 auto; }
+    .about-image-second { width: 50%; bottom: -20px; right: -10px; }
 }
 @media(max-width: 768px) {
     .top-bar-content { justify-content: center; text-align: center; }
@@ -723,6 +912,14 @@ footer {
 </head>
 <body>
 
+<!-- Preloader -->
+<div class="preloader" id="preloader">
+    <div class="loader"></div>
+</div>
+
+<!-- Scroll Progress Bar -->
+<div class="scroll-progress" id="scrollProgress"></div>
+
 <!-- Top Bar -->
 <div class="top-bar">
     <div class="top-bar-content">
@@ -737,7 +934,7 @@ footer {
 </div>
 
 <!-- Navbar -->
-<nav>
+<nav id="navbar">
     <div class="nav-content">
         <a href="#" class="logo">
             <div class="logo-icon">⚖</div>
@@ -760,20 +957,20 @@ footer {
 <!-- Hero -->
 <section class="hero" id="home">
     <div class="hero-content">
-        <div class="hero-text">
-            <span class="hero-badge">⚖ Trusted Legal Counsel</span>
-            <h1>Defending Your <span>Rights</span> With Integrity & Excellence</h1>
-            <p>Personalized legal solutions you can trust. From civil disputes to criminal defense, I am committed to delivering justice with dedication and confidentiality.</p>
-            <div class="hero-buttons">
+        <div class="hero-text" data-aos="fade-right" data-aos-duration="1000">
+            <span class="hero-badge" data-aos="zoom-in" data-aos-delay="200">⚖ Trusted Legal Counsel</span>
+            <h1 data-aos="fade-up" data-aos-delay="300">Defending Your <span>Rights</span> With Integrity & Excellence</h1>
+            <p data-aos="fade-up" data-aos-delay="500">Personalized legal solutions you can trust. From civil disputes to criminal defense, I am committed to delivering justice with dedication and confidentiality.</p>
+            <div class="hero-buttons" data-aos="fade-up" data-aos-delay="700">
                 <a href="#contact" class="btn-primary">Book Consultation →</a>
                 <a href="#services" class="btn-secondary">Our Services</a>
             </div>
         </div>
-        <div class="hero-image">
+        <div class="hero-image" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="400">
             <div class="hero-image-wrapper">
                 <img src="https://i.imgur.com/DbiO2R0.jpeg" alt="Advocate Vijay Chaudhary">
             </div>
-            <div class="floating-card">
+            <div class="floating-card" data-aos="zoom-in" data-aos-delay="1000">
                 <div class="floating-card-icon">⚖</div>
                 <div class="floating-card-text">
                     <strong>Professional Service</strong>
@@ -788,37 +985,43 @@ footer {
 <section class="about" id="about">
     <div class="container">
         <div class="about-grid">
-            <div class="about-image">
-                <img src="https://i.imgur.com/DbiO2R0.jpeg" alt="About Advocate">
+            <div class="about-image-stack" data-aos="fade-right" data-aos-duration="1000">
+                <div class="about-decoration"></div>
+                <div class="about-image-main">
+                    <img src="https://i.imgur.com/DbiO2R0.jpeg" alt="About Advocate">
+                </div>
+                <div class="about-image-second" data-aos="zoom-in" data-aos-delay="500">
+                    <img src="https://i.imgur.com/c9ohSTW.jpeg" alt="Advocate Professional">
+                </div>
             </div>
-            <div>
+            <div data-aos="fade-left" data-aos-duration="1000">
                 <span class="section-tag">About Me</span>
                 <h2 class="section-title">Committed to Justice, Driven by Integrity</h2>
                 <p class="section-desc">As a dedicated legal professional, I provide personalized legal services with strong focus on integrity, confidentiality, and results. My practice is built on trust, hard work, and deep understanding of the law.</p>
                 
                 <div class="about-features">
-                    <div class="feature-item">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="100">
                         <div class="feature-icon">✓</div>
                         <div>
                             <strong>Confidential Approach</strong>
                             <p>Your matters stay private</p>
                         </div>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="200">
                         <div class="feature-icon">✓</div>
                         <div>
                             <strong>Personal Attention</strong>
                             <p>Every client matters</p>
                         </div>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="300">
                         <div class="feature-icon">✓</div>
                         <div>
                             <strong>Transparent Process</strong>
                             <p>Clear communication always</p>
                         </div>
                     </div>
-                    <div class="feature-item">
+                    <div class="feature-item" data-aos="fade-up" data-aos-delay="400">
                         <div class="feature-icon">✓</div>
                         <div>
                             <strong>Fair Pricing</strong>
@@ -834,38 +1037,38 @@ footer {
 <!-- Services -->
 <section class="services" id="services">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-tag">Practice Areas</span>
             <h2 class="section-title">Comprehensive Legal Services</h2>
             <p class="section-desc">Expert legal representation across multiple areas of law, tailored to your unique needs.</p>
         </div>
         <div class="services-grid">
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="100">
                 <div class="service-icon">⚖</div>
                 <h3>Civil Law</h3>
                 <p>Property disputes, contract matters, and civil litigation handled with precision and expertise.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="200">
                 <div class="service-icon">🛡</div>
                 <h3>Criminal Law</h3>
                 <p>Strong defense representation in criminal cases with complete confidentiality and dedication.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="300">
                 <div class="service-icon">👨‍👩‍👧</div>
                 <h3>Family Law</h3>
                 <p>Sensitive handling of divorce, custody, maintenance, and other family-related legal matters.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="400">
                 <div class="service-icon">🏢</div>
                 <h3>Corporate Law</h3>
                 <p>Business contracts, compliance, and corporate legal advisory for companies of all sizes.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="500">
                 <div class="service-icon">🏠</div>
                 <h3>Property Law</h3>
                 <p>Title verification, registration, sale deeds, and complete real estate legal solutions.</p>
             </div>
-            <div class="service-card">
+            <div class="service-card" data-aos="flip-up" data-aos-delay="600">
                 <div class="service-icon">💼</div>
                 <h3>Legal Consultation</h3>
                 <p>Expert legal advice and consultation services for individuals and businesses alike.</p>
@@ -874,30 +1077,51 @@ footer {
     </div>
 </section>
 
+<!-- Profile Banner -->
+<section class="profile-banner">
+    <div class="container">
+        <div class="profile-banner-grid">
+            <div class="profile-banner-img" data-aos="zoom-in" data-aos-duration="1000">
+                <img src="https://i.imgur.com/c9ohSTW.jpeg" alt="Advocate Vijay Chaudhary - Professional">
+            </div>
+            <div class="profile-banner-text" data-aos="fade-left" data-aos-duration="1000" data-aos-delay="200">
+                <span class="section-tag">Meet The Advocate</span>
+                <h2>Dedicated to <span>Justice</span> & Client Success</h2>
+                <p>Every case is unique, and so is every client. I believe in building strong relationships based on trust, transparency, and unwavering commitment to delivering the best possible legal outcomes.</p>
+                <div class="profile-quote" data-aos="fade-up" data-aos-delay="400">
+                    "Justice delayed is justice denied. My mission is to ensure every client receives timely, ethical, and effective legal representation."
+                </div>
+                <p>With a deep understanding of the legal system and a passion for upholding justice, I provide strategic legal solutions tailored to your specific needs.</p>
+                <div class="profile-signature" data-aos="fade-up" data-aos-delay="600">— Vijay Chaudhary, Advocate</div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <!-- Why Choose -->
 <section class="why-choose" id="why">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-tag">Why Choose Us</span>
             <h2 class="section-title">The Trusted Choice for Legal Excellence</h2>
         </div>
         <div class="why-grid">
-            <div class="why-card">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="100">
                 <div class="why-icon">🎯</div>
                 <h4>Result Oriented</h4>
                 <p>Focused on achieving the best possible outcome for every client.</p>
             </div>
-            <div class="why-card">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="200">
                 <div class="why-icon">🔒</div>
                 <h4>100% Confidential</h4>
                 <p>Your information and case details are completely secure.</p>
             </div>
-            <div class="why-card">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="300">
                 <div class="why-icon">⏰</div>
                 <h4>Always Available</h4>
                 <p>Prompt response and dedicated support whenever you need.</p>
             </div>
-            <div class="why-card">
+            <div class="why-card" data-aos="fade-up" data-aos-delay="400">
                 <div class="why-icon">💯</div>
                 <h4>Ethical Practice</h4>
                 <p>Honest advice based on integrity and professional ethics.</p>
@@ -909,13 +1133,13 @@ footer {
 <!-- Contact -->
 <section class="contact" id="contact">
     <div class="container">
-        <div class="section-header">
+        <div class="section-header" data-aos="fade-up">
             <span class="section-tag">Get In Touch</span>
             <h2 class="section-title">Schedule Your Consultation</h2>
             <p class="section-desc">Reach out today for confidential legal guidance tailored to your needs.</p>
         </div>
         <div class="contact-grid">
-            <div class="contact-info-box">
+            <div class="contact-info-box" data-aos="fade-right" data-aos-duration="1000">
                 <h3>Contact Information</h3>
                 <p>Feel free to reach out through any of the following channels.</p>
                 
@@ -949,7 +1173,7 @@ footer {
                 </div>
             </div>
             
-            <div class="contact-form-box">
+            <div class="contact-form-box" data-aos="fade-left" data-aos-duration="1000">
                 <h3>Send a Message</h3>
                 <p>Fill the form and I'll get back to you within 24 hours.</p>
                 <form onsubmit="event.preventDefault(); alert('Thank you! Your message has been sent successfully.'); this.reset();">
@@ -993,7 +1217,7 @@ footer {
 <!-- Footer -->
 <footer>
     <div class="footer-content">
-        <div class="footer-col">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="100">
             <h4>Advocate Vijay Chaudhary</h4>
             <p>Providing trusted legal counsel and professional representation across multiple practice areas. Your justice is my mission.</p>
             <div class="social-icons">
@@ -1003,7 +1227,7 @@ footer {
                 <a href="#" title="Instagram">◉</a>
             </div>
         </div>
-        <div class="footer-col">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="200">
             <h4>Quick Links</h4>
             <ul>
                 <li><a href="#home">Home</a></li>
@@ -1012,7 +1236,7 @@ footer {
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
-        <div class="footer-col">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="300">
             <h4>Practice Areas</h4>
             <ul>
                 <li><a href="#services">Civil Law</a></li>
@@ -1021,7 +1245,7 @@ footer {
                 <li><a href="#services">Property Law</a></li>
             </ul>
         </div>
-        <div class="footer-col">
+        <div class="footer-col" data-aos="fade-up" data-aos-delay="400">
             <h4>Contact</h4>
             <ul>
                 <li>📞 +91 98765 43210</li>
@@ -1036,7 +1260,60 @@ footer {
 </footer>
 
 <!-- WhatsApp Float -->
-<a href="https://wa.me/919876543210" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
+<a href="https://wa.me/919876543210?text=Hello%20Advocate%20Vijay%20Sir,%20I%20need%20legal%20consultation" class="whatsapp-float" target="_blank" title="Chat on WhatsApp">💬</a>
+
+<!-- Back to Top -->
+<button class="back-to-top" id="backToTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Back to top">↑</button>
+
+<!-- AOS Animation Library -->
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script>
+// Initialize AOS Animations
+AOS.init({
+    duration: 800,
+    easing: 'ease-in-out',
+    once: true,
+    offset: 100
+});
+
+// Preloader
+window.addEventListener('load', function() {
+    setTimeout(() => {
+        document.getElementById('preloader').classList.add('hidden');
+    }, 500);
+});
+
+// Scroll Progress Bar
+window.addEventListener('scroll', function() {
+    const scrollTop = window.pageYOffset;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const scrollPercent = (scrollTop / docHeight) * 100;
+    document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+    
+    // Navbar shrink on scroll
+    const navbar = document.getElementById('navbar');
+    if (scrollTop > 50) {
+        navbar.classList.add('scrolled');
+    } else {
+        navbar.classList.remove('scrolled');
+    }
+    
+    // Back to top button
+    const backToTop = document.getElementById('backToTop');
+    if (scrollTop > 500) {
+        backToTop.classList.add('visible');
+    } else {
+        backToTop.classList.remove('visible');
+    }
+});
+
+// Smooth close mobile menu on link click
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active');
+    });
+});
+</script>
 
 </body>
-  </html>
+</html>
